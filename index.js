@@ -22,7 +22,7 @@ client.on('ready', () => {
 
 
 client.on('messageCreate', (message) => {
-    if (!message.content.startsWith('r?')) { return }
+    if (!message.content.startsWith('a?')) { return }
     let rawdata = fs.readFileSync('channels.json');
     let channels = JSON.parse(rawdata).channels;
     for (let i = 0; i < channels.length; i++) {
