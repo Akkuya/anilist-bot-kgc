@@ -64,15 +64,13 @@ export default async({ client, message, args }) => {
     function handleData(data) {
         let results = data.data.Page.characters[i]
         console.log(results)
-        if (results.description) {
-        let desc = results.description.substring(0, 347) + '..'
+        let desc = results.description ?? "No description found."
+        desc = desc.substring(0, 347) + '..'
         if (desc.search('!~') == -1 && desc.search('~!') == -1) {}
         else if (desc.search('!~') == -1 && desc.search('~!') != -1) {desc = desc + '||'}
         desc = desc.replace("~!", "||")
         desc = desc.replace("!~", "||")
-        } else {
-            let desc = "No description available."
-        }
+    
         const embed = new MessageEmbed()
             .setColor("#000000")
             .setTitle(results.name.full)
