@@ -1,32 +1,23 @@
 import fetch from 'node-fetch'
-import { MessageEmbed } from "discord.js"
-
-
-export default async({ client, message, args }) => {
-
+import { MessageEmbed } from 'discord.js';
+export default async({message, args}) => {
     let query = args.join(" ")
     const request = `
         query ($search: String) { # Define which variables will be used in the query (id)
            Page (page: 1, perPage: 20) {
-            media (search: $search, type: MANGA, sort: POPULARITY_DESC) { # Insert our variables into the query arguments (id) (type: ANIME is hard-coded in the query)
-                id
-                title {
-                    romaji
-                    english
+            staff (search: $search) { # Insert our variables into the query arguments (id) (type: ANIME is hard-coded in the query)
+                name {
+                    full
                     native
                 }
-                description
-                bannerImage
-                coverImage {
-                    extraLarge
+                image {
                     large
-                    medium
-                    color
                 }
-                format
-                chapters
-                status
+                description
+                gender
+                age
                 siteUrl
+                primaryOccupations 
             }
            }
         }
@@ -62,31 +53,39 @@ export default async({ client, message, args }) => {
     let i = 0
     let noResults = 'No more results.'
     function handleData(data) {
-        let results = data.data.Page.media[i]
-        
+        let results = data.data.Page.staff[i]
         console.log(results)
         let desc = results.description.substring(0, 347) + '..'
+        if (desc.search('!~') == -1 && desc.search('~!') == -1) {}
+        else if (desc.search('!~') == -1 && desc.search('~!') != -1) {desc = desc + '||'}
+        desc = desc.replace("~!", "||")
+        desc = desc.replace("!~", "||")
+        let nextStaff
+        if (data.data.Page.staff.length == 1 ) {
+            nextStaff = "No more results."
+        } else {
+            nextStaff = data.data.Page.staff[i+1].name.full ?? data.data.Page.media[i+1].name.native
+        }
         const embed = new MessageEmbed()
-            .setColor(results.coverImage.color)
-            .setTitle(results.title.english ?? results.title.romaji)
+            .setColor("#000000")
+            .setTitle(results.name.full ?? results.title.native)
             .setURL(results.siteUrl)
             .addFields({
-                name: 'Format',
-                value: `${results.format}`,
+                name: 'Age',
+                value: `${results.age ?? "Age not specified."}`,
                 inline: true
             }, {
-                name: `Chapters`,
-                value: `${results.chapters ?? "Unknown"}`,
+                name: `Gender`,
+                value: `${results.gender ?? "Gender not specified."}`,
                 inline: true
             }, {
-                name: 'Status',
-                value: `${results.status}`,
+                name: 'Primary Occupations',
+                value: `${results.primaryOccupations[0] ?? "Primary Occupations not specified."}`,
                 inline: true
             }, )
             .setDescription(desc)
-            .setThumbnail(results.coverImage.extraLarge)
-            .setImage(results.bannerImage)
-            .setFooter(`Next result: ${nextManga}`)
+            .setImage(results.image.large)
+            .setFooter(`Next result: ${nextStaff}`)
         if (message) {
             message.reply({
                 embeds: [embed]

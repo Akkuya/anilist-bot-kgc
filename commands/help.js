@@ -7,7 +7,7 @@ export default async ({message}) => {
             .setDescription('Command Usage. Prefix is a?.')
             .addFields({
                 name: 'a?*<type>* *<query>*',
-                value: 'Searches AniList. \nValid types are **anime (a)**, **manga (m)**, and **character (c)**. \nExample Usage: `a?anime oregairu`'
+                value: 'Searches AniList. \nValid types are **anime (a)**, **manga (m)**, **character (c)**, and staff (s). \nExample Usage: `a?anime oregairu`'
             }, {
                 name: 'a?ignore *<channelid>*',
                 value: 'Adds a channel to the list of channels the bot will ignore commands from.'
