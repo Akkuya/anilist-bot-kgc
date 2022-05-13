@@ -63,6 +63,11 @@ export default async({ client, message, args }) => {
 
     function handleData(data) {
         let results = data.data.Page.characters[i]
+        if (results.length == 1) {
+            let nextChar = "No more results."
+        } else {
+            nextChar = data.data.Page.characters[i+1].name.full
+        }
         console.log(results)
         let desc = results.description ?? "No description found."
         desc = desc.substring(0, 347) + '..'
@@ -78,7 +83,7 @@ export default async({ client, message, args }) => {
             .setDescription(desc)
             .addField('Show of Origin', results.media.nodes[0].title.english ?? results.media.nodes[0].title.romaji, true)
             .setImage(results.image.large)
-            .setFooter(`Next result: ${data.data.Page.characters[i+1].name.full}`)
+            .setFooter(`Next result: ${nextChar}`)
         if (message) {
             message.reply({
                 embeds: [embed]
