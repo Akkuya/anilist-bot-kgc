@@ -65,6 +65,10 @@ export default async({ client, message, args }) => {
         let results = data.data.Page.characters[i]
         console.log(results)
         let desc = results.description.substring(0, 347) + '..'
+        if (desc.search('!~') == -1 && desc.search('~!') == -1) {}
+        else if (desc.search('!~') == -1 && desc.search('~!') != -1) {desc = desc + '||'}
+        desc = desc.replace("~!", "||")
+        desc = desc.replace("!~", "||")
         const embed = new MessageEmbed()
             .setColor("#000000")
             .setTitle(results.name.full)
