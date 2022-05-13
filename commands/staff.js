@@ -55,7 +55,7 @@ export default async({message, args}) => {
     function handleData(data) {
         let results = data.data.Page.staff[i]
         console.log(results)
-        let desc = results.description.substring(0, 347) + '..'
+        let desc = results.description.substring(0, 700) + '..'
         if (desc.search('!~') == -1 && desc.search('~!') == -1) {}
         else if (desc.search('!~') == -1 && desc.search('~!') != -1) {desc = desc + '||'}
         desc = desc.replace("~!", "||")
