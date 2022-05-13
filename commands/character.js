@@ -64,7 +64,7 @@ export default async({ client, message, args }) => {
     function handleData(data) {
         let results = data.data.Page.characters[i]
         let nextChar
-        if (results.length == 1) {
+        if (data.data.Page.characters.length == 1) {
             nextChar = "No more results."
         } else {
             nextChar = data.data.Page.characters[i+1].name.full
