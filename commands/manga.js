@@ -64,7 +64,7 @@ export default async({ client, message, args }) => {
     function handleData(data) {
         let results = data.data.Page.media[i]
         let nextManga
-        if (data.data.Page.media.length == 0 ) {
+        if (data.data.Page.media.length == 1 ) {
             nextManga = "No more results."
         } else {
             nextManga = data.data.Page.media[i+1].title.english ?? data.data.Page.media[i+1].title.romaji
