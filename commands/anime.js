@@ -81,7 +81,7 @@ export default async({ client, message, args }) => {
                 inline: true
             }, {
                 name: `Episodes`,
-                value: `${results.episodes}`,
+                value: `${results.episodes ?? "Unknown"}`,
                 inline: true
             }, {
                 name: 'Status',
