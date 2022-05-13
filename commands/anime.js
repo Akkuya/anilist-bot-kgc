@@ -63,6 +63,12 @@ export default async({ client, message, args }) => {
     let noResults = 'No More Results'
     function handleData(data) {
         let results = data.data.Page.media[i]
+        let nextAnime
+        if (data.data.Page.media.length == 0 ) {
+            nextAnime = "No more results."
+        } else {
+            nextAnime = data.data.Page.media[i].title.english ?? data.data.Page.media[i].title.romaji
+        }
         console.log(results)
         let desc = results.description.substring(0, 347) + '..'
         const embed = new MessageEmbed()
@@ -85,7 +91,7 @@ export default async({ client, message, args }) => {
             .setDescription(desc)
             .setThumbnail(results.coverImage.extraLarge)
             .setImage(results.bannerImage)
-            .setFooter(`Next result: ${data.data.Page.media[i+1].title.english ?? noResults}`)
+            .setFooter(`Next result: ${nextAnime}`)
         if (message) {
             message.reply({
                 embeds: [embed]
