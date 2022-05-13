@@ -67,7 +67,7 @@ export default async({ client, message, args }) => {
         if (data.data.Page.media.length == 0 ) {
             nextAnime = "No more results."
         } else {
-            nextAnime = data.data.Page.media[i].title.english ?? data.data.Page.media[i].title.romaji
+            nextAnime = data.data.Page.media[i+1].title.english ?? data.data.Page.media[i+1].title.romaji
         }
         console.log(results)
         let desc = results.description.substring(0, 347) + '..'
