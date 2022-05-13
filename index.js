@@ -26,7 +26,7 @@ const client = new Client(
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}`);
-    client.user.setActivity("r?help", {
+    client.user.setActivity("a?help", {
         type: "PLAYING",
     });
     
@@ -39,7 +39,7 @@ client.on('messageCreate', async (message) => {
     for (let i = 0; i < channels.length; i++) {
         if (message.channel == channels[i]) { return }
     }
-    if (!message.content.toLowerCase().startsWith('r?')) { return }
+    if (!message.content.toLowerCase().startsWith('a?')) { return }
     if (message.author.bot) return
 
     let commandBody = message.content.slice(2)
