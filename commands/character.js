@@ -71,7 +71,7 @@ export default async({ client, message, args }) => {
         desc = desc.replace("~!", "||")
         desc = desc.replace("!~", "||")
         } else {
-            desc = "No description available."
+            let desc = "No description available."
         }
         const embed = new MessageEmbed()
             .setColor("#000000")
