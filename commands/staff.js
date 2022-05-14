@@ -17,6 +17,11 @@ export default async({message, args}) => {
                 gender
                 age
                 siteUrl
+                dateOfBirth {
+                    day
+                    month
+                    year
+                }
                 primaryOccupations 
             }
            }
@@ -49,7 +54,7 @@ export default async({message, args}) => {
         });
     }
 
-
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     let i = 0
     let noResults = 'No more results.'
     function handleData(data) {
@@ -66,6 +71,17 @@ export default async({message, args}) => {
         } else {
             nextStaff = data.data.Page.staff[i+1].name.full ?? data.data.Page.media[i+1].name.native
         }
+        let day = results.dateOfBirth.day 
+        let month = results.dateOfBirth.month
+        let year = results.dateOfBirth.year 
+        let birthdate
+        if (!year) {
+            birthdate = "No birthdate specified."
+        }
+        else {
+            birthdate = `${day.toString()} ${months[month].toString()}, ${year}`
+        }
+
         const embed = new MessageEmbed()
             .setColor("#000000")
             .setTitle(results.name.full ?? results.title.native)
@@ -82,7 +98,11 @@ export default async({message, args}) => {
                 name: 'Primary Occupations',
                 value: `${results.primaryOccupations[0] ?? "Primary Occupations not specified."}`,
                 inline: true
-            }, )
+            }, {
+                name: 'Birth Date',
+                value: `${birthdate}`,
+                inline: true
+            })
             .setDescription(desc)
             .setImage(results.image.large)
             .setFooter(`Next result: ${nextStaff}`)
