@@ -79,7 +79,7 @@ export default async({message, args}) => {
             birthdate = "No birthdate specified."
         }
         else {
-            birthdate = `${day.toString()} ${months[month].toString()}, ${year}`
+            birthdate = `${day.toString()} ${months[month-1].toString()}, ${year}`
         }
 
         const embed = new MessageEmbed()
