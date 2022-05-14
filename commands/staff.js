@@ -76,7 +76,7 @@ export default async({message, args}) => {
         let year = results.dateOfBirth.year 
         let birthdate
         if (!year) {
-            birthdate = "No birthdate specified."
+            birthdate = "Not specified."
         }
         else {
             birthdate = `${day.toString()} ${months[month-1].toString()}, ${year}`
@@ -88,15 +88,15 @@ export default async({message, args}) => {
             .setURL(results.siteUrl)
             .addFields({
                 name: 'Age',
-                value: `${results.age ?? "Age not specified."}`,
+                value: `${results.age ?? "Not specified."}`,
                 inline: true
             }, {
                 name: `Gender`,
-                value: `${results.gender ?? "Gender not specified."}`,
+                value: `${results.gender ?? "Not specified."}`,
                 inline: true
             }, {
                 name: 'Primary Occupations',
-                value: `${results.primaryOccupations[0] ?? "Primary Occupations not specified."}`,
+                value: `${results.primaryOccupations[0] ?? "Not specified."}`,
                 inline: true
             }, {
                 name: 'Birth Date',
