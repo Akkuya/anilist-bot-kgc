@@ -8,7 +8,7 @@ export default async({ client, message, args }) => {
     const request = `
         query ($search: String) { # Define which variables will be used in the query (id)
            Page (page: 1, perPage: 20) {
-            media (search: $search, type: ANIME, sort: POPULARITY_DESC) { # Insert our variables into the query arguments (id) (type: ANIME is hard-coded in the query)
+            media (search: $search, type: ANIME, sort: SEARCH_MATCH) { # Insert our variables into the query arguments (id) (type: ANIME is hard-coded in the query)
                 id
                 title {
                     romaji
