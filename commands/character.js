@@ -76,7 +76,12 @@ export default async({ client, message, args }) => {
         else if (desc.search('!~') == -1 && desc.search('~!') != -1) {desc = desc + '||'}
         desc = desc.replace("~!", "||")
         desc = desc.replace("!~", "||")
-    
+        for (let i = 0; i<10; i++) {
+            desc = desc.replace('<i>', "*")
+            desc = desc.replace('</i>', "*")
+            desc = desc.replace('<br>', "\n")
+            desc = desc.replace('<br>', "\n")
+        }
         const embed = new MessageEmbed()
             .setColor("#000000")
             .setTitle(results.name.full)

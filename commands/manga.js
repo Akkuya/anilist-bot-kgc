@@ -71,6 +71,12 @@ export default async({ client, message, args }) => {
         }
         console.log(results)
         let desc = results.description.substring(0, 347) + '..'
+        for (let i = 0; i<10; i++) {
+            desc = desc.replace('<i>', "*")
+            desc = desc.replace('</i>', "*")
+            desc = desc.replace('<br>', "\n")
+            desc = desc.replace('<br>', "\n")
+        }
         const embed = new MessageEmbed()
             .setColor(results.coverImage.color)
             .setTitle(results.title.english ?? results.title.romaji)

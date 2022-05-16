@@ -81,7 +81,12 @@ export default async({message, args}) => {
         else {
             birthdate = `${day.toString()} ${months[month-1].toString()}, ${year}`
         }
-
+        for (let i = 0; i<10; i++) {
+            desc = desc.replace('<i>', "*")
+            desc = desc.replace('</i>', "*")
+            desc = desc.replace('<br>', "\n")
+            desc = desc.replace('<br>', "\n")
+        }
         const embed = new MessageEmbed()
             .setColor("#000000")
             .setTitle(results.name.full ?? results.title.native)
